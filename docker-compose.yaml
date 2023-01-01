@@ -1,0 +1,27 @@
+version: "3.3"
+
+services:
+  pg_tasks:
+    image: postgres:15.1
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGES_DB=tasks
+      - POSTGRES_PASSWORD=password
+    networks:
+      - dockercompose
+  backend:
+    depends_on:
+      - pg_tasks
+    image: flaskapp
+    ports:
+      - "5000:5000"
+    
+    networks:
+      - dockercompose
+
+networks:
+  dockercompose:
+  
+   
+  
